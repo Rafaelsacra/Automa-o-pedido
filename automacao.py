@@ -1,28 +1,39 @@
+from basepandas import carregar_dados
 import pyautogui   
 import time
 
-pyautogui.PAUSE = 0,3
-#RPA - PEGAR POSIÇÕES DO MOUSE E DA TELA
-print(pyautogui.position())
-print(pyautogui.size())
 
-#RPA - FUNÇÕES DO MOUSE
-time.sleep(5)
-pyautogui.press('insert')
+caminho_arquivo = r'C:/Users/Usuario/Desktop/Automaorder/teste.xlsx'
 
-#codigo do produto
-pyautogui.write(123)
-pyautogui.press('down')
+dados = carregar_dados(caminho_arquivo)
 
-# transferencia
-pyautogui.click(x=1605, y=105)
+for index, row in dados.iterrows():
+    
 
-# quantidade de pedido
-pyautogui.write(50)
-pyautogui.press('down')
+    pyautogui.PAUSE = 0.3
+    #RPA - PEGAR POSIÇÕES DO MOUSE E DA TELA
+    print(pyautogui.position())
+    print(pyautogui.size())
 
-#clica no produto
-pyautogui.click(x=1605, y=105)
+    time.sleep(3)
+
+    #RPA - FUNÇÕES DO MOUSE
+    time.sleep(0.5)
+    pyautogui.click(x=1612, y=104)
+
+    #codigo do produto
+    pyautogui.write(str(row['codigo']))
+    pyautogui.press('down')
+
+    # transferencia
+    pyautogui.click(x=1879, y=463)
+
+    # quantidade de pedido
+    pyautogui.write(str(row['quantidade']))
+    pyautogui.press('down')
+
+    #clica no produto
+    pyautogui.click(x=1574, y=347)
 
 
  
